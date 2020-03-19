@@ -31,10 +31,7 @@ const getAllTodos = (req, res, next) => {
 }
 
 const deleteTodo = (req, res, next) => {
-  console.log("im a delete controller");
-  console.log("r.body", req.body)
   const deleteId = req.params.id
-  console.log("r.params", deleteId)
   const deleteQ = `DELETE FROM todos WHERE todos.id= ${deleteId}`;
   pool.query(deleteQ, (err, result) => {
     if (err) return next(err);
@@ -46,7 +43,6 @@ const deleteTodo = (req, res, next) => {
 }
 
 const updateTodo = (req, res, next) => {
-  console.log("i am updating bitcheesss!")
   const updateQ = `UPDATE todos SET todo_text='${req.body.todo_text}' WHERE todos.id=${req.params.id}`;
   pool.query(updateQ, (err, result) => {
     if (err) return next(err)
