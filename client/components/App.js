@@ -19,62 +19,24 @@ function App() {
       .then(data => setTodos(data))
   }, [])
 
-  // useEffect(() => {
-  //   fetch("http://localhost:8080/api/todos", { method: "POST", headers: { 'Content-Type': 'application/json' }, body: todo })
-  //     .then(res => console.log(res))
-  //     .then(data => console.log("success", data))
-
-  // }, [todos])
-
-
-  //  ADAM i copied this from a tutorial site but it didn't work. 
-  // HERE to line 78.  You can see above alternate methods.  I think I have to wrap useEffect in a function but when I do I get an error about a hook having to be in the body of a function.
-  function useAsyncEndpoint(fn) {
-    const [res, setRes] = useState({
-      data: null,
-      complete: false,
-      pending: false,
-      error: false
-    });
-    const [req, setReq] = useState()
-
-    useEffect(() => {
-      if (!req) return;
-      setRes({
-        data: null,
-        pending: true,
-        error: false,
-        complete: false
-      });
-      axios(req)
-        .then(res => setRes({
-          data: res.data,
-          pending: false,
-          error: false,
-          complete: true
-        }))
-        .catch(() => setRes({
-          data: null,
-          pending: false,
-          error: true,
-          complete: true
-        }));
-    }, [req])
-    return [res, (...args) => setReq(fn(...args))];
-  }
-
-  function postTodoEndpoint() {
-    return useAsyncEndpoint(todo => ({
-      url: 'http://localhost:8080/api/todos',
-      method: 'POST',
-      todo
-    }))
-  }
 
   const addTodo = todo => {
     console.log("adding a todo", todo)
-    postTodoEndpoint(todo)
-    setTodos([...todos, todo])
+    const opts = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ todo })
+    }
+    fetch('http://localhost:8080/api/todos', opts)
+      .then(res => res.json())
+      .then(newTodo => {
+        setTodos(todos => {
+          console.log("new one", newTodo[0])
+
+          return [...todos, newTodo[0]]
+        })
+      })
+      .catch((console.error))
   }
 
   return (

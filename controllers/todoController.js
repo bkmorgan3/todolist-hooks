@@ -2,8 +2,11 @@ const pool = require("../database/database");
 
 const addTodo = (req, res, next) => {
   console.log("inside make a todo controller");
-  console.log("req.body", req.body.todo_text)
-  const qAddTodo = `INSERT INTO todos (todo_text) VALUES ('${req.body.todo_text}')`;
+  console.log("req.body", req.body.todo)
+  const qAddTodo = {
+    text: `INSERT INTO todos (todo_text) VALUES ($1) RETURNING *`,
+    values: [req.body.todo]
+  };
   pool.query(qAddTodo, (err, result) => {
     if (err) return next(err);
     if (result === undefined) {
