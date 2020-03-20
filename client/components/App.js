@@ -12,6 +12,7 @@ function App() {
   ]
   const URL = 'http://localhost:8080/api/todos';
   const [todos, setTodos] = useState(todoData);
+  const [editing, setEditing] = useState(false)
 
 
   useEffect(() => {
@@ -31,8 +32,6 @@ function App() {
       .then(res => res.json())
       .then(newTodo => {
         setTodos(todos => {
-          console.log("new one", newTodo[0])
-
           return [...todos, newTodo[0]]
         })
       })
@@ -42,13 +41,13 @@ function App() {
   const deleteTodo = todo => {
     const opts = {
       method: 'DELETE',
-
     }
-    console.log("deleting todo", todo)
     fetch(`${URL}/${todo}`, opts)
     setTodos(todos.filter(item => item.id !== todo))
+  }
 
-
+  const editTodo = todo => {
+    console.log("editing todo", todo)
   }
 
   return (
@@ -61,7 +60,7 @@ function App() {
         </div>
         <div className="todos">
           <h2>View Todos</h2>
-          <Todos todos={todos} deleteTodo={deleteTodo} />
+          <Todos todos={todos} deleteTodo={deleteTodo} editTodo={editTodo} />
         </div>
       </div>
     </div>
