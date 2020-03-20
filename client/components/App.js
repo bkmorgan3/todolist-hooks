@@ -10,24 +10,24 @@ function App() {
     { id: 2, text: 'find a chicken sandwich' },
     { id: 3, text: "see Andang all day" }
   ]
+  const URL = 'http://localhost:8080/api/todos';
   const [todos, setTodos] = useState(todoData);
 
 
   useEffect(() => {
-    fetch('http://localhost:8080/api/todos')
+    fetch(URL)
       .then(res => res.json())
       .then(data => setTodos(data))
   }, [])
 
 
   const addTodo = todo => {
-    console.log("adding a todo", todo)
     const opts = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ todo })
     }
-    fetch('http://localhost:8080/api/todos', opts)
+    fetch(URL, opts)
       .then(res => res.json())
       .then(newTodo => {
         setTodos(todos => {
@@ -37,6 +37,18 @@ function App() {
         })
       })
       .catch((console.error))
+  }
+
+  const deleteTodo = todo => {
+    const opts = {
+      method: 'DELETE',
+
+    }
+    console.log("deleting todo", todo)
+    fetch(`${URL}/${todo}`, opts)
+    setTodos(todos.filter(item => item.id !== todo))
+
+
   }
 
   return (
@@ -49,7 +61,7 @@ function App() {
         </div>
         <div className="todos">
           <h2>View Todos</h2>
-          <Todos todos={todos} />
+          <Todos todos={todos} deleteTodo={deleteTodo} />
         </div>
       </div>
     </div>

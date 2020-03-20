@@ -8,8 +8,8 @@ const Todos = props => {
         props.todos.map(todo => (
 
           < li key={todo.id}> {todo.todo_text}
-            < button > Edit Todo</button>
-            <button>Delete Todo</button>
+            < button> Edit Todo</button>
+            <button onClick={() => props.deleteTodo(todo.id)}>Delete Todo</button>
           </li>
         ))
       ) : <h1>Nada</h1>}
