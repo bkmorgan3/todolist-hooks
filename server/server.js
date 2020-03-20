@@ -1,5 +1,5 @@
 const express = require('express');
-const path = require('path';)
+const path = require('path');
 const bodyParser = require('body-parser')
 const todoController = require("../controllers/todoController");
 
@@ -14,19 +14,19 @@ app.get("/", (req, res) => {
     .sendFile(path.join(__dirname, '../client/index.html'))
 })
 
-app.get("/todos", todoController.getAllTodos, (req, res) => {
+app.get("/api/todos", todoController.getAllTodos, (req, res) => {
   res.status(200).json(res.locals.todos)
 });
 
-app.post("/todos", todoController.addTodo, (req, res) => {
+app.post("/api/todos", todoController.addTodo, (req, res) => {
   res.status(200).json(res.locals.todo)
 });
 
-app.delete("/todos/:id", todoController.deleteTodo, (req, res) => {
+app.delete("/api/todos/:id", todoController.deleteTodo, (req, res) => {
   res.status(200).json()
 });
 
-app.put("/todos/:id", todoController.updateTodo, (req, res) => {
+app.put("/api/todos/:id", todoController.updateTodo, (req, res) => {
   res.status(200).json(res.locals.todos)
 })
 
