@@ -27,7 +27,8 @@ function App() {
   // }, [todos])
 
 
-
+  //  ADAM i copied this from a tutorial site but it didn't work. 
+  // HERE to line 78.  You can see above alternate methods.  I think I have to wrap useEffect in a function but when I do I get an error about a hook having to be in the body of a function.
   function useAsyncEndpoint(fn) {
     const [res, setRes] = useState({
       data: null,
