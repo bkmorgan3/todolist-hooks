@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Todos from './Todos';
 import AddTodoForm from './AddTodoForm';
-import axios from 'axios';
+import EditForm from './EditForm';
 
 function App() {
 
@@ -9,10 +9,13 @@ function App() {
     { id: 1, text: "have a snack" },
     { id: 2, text: 'find a chicken sandwich' },
     { id: 3, text: "see Andang all day" }
-  ]
+  ];
+  const initialFormState = {text: ''};
   const URL = 'http://localhost:8080/api/todos';
   const [todos, setTodos] = useState(todoData);
   const [editing, setEditing] = useState(false)
+  const [currentTodo, setCurrentTodo] = useState(initialFormState)
+
 
 
   useEffect(() => {
@@ -48,6 +51,19 @@ function App() {
 
   const editTodo = todo => {
     console.log("editing todo", todo)
+    setEditing(true)
+    setCurrentTodo(todo)
+    const opts = {
+      method: 'PUT',
+      body: JSON.stringify({todo})
+    }
+  
+  }
+
+  const updateTodo = (id, updatedTodo) => {
+    setEditing(false)
+
+    setTodos(todos.map(item => (item.id === id? updatedTodo: item)))
   }
 
   return (
@@ -55,8 +71,22 @@ function App() {
       <h1>My Todo lists.</h1>
       <div className="row">
         <div className="todo-form">
+          {editing ? (
+            <div>
+              <h2>Edit User</h2>
+              <EditForm
+                editing={editing}
+                setEditing={setEditing}
+                currentTodo={currentTodo}
+                updateTodo={updateTodo}
+              />
+              </div>
+          ) : (
+          <div>
           <h2>Add a Todo</h2>
           <AddTodoForm addTodo={addTodo} />
+          </div>
+          )}
         </div>
         <div className="todos">
           <h2>View Todos</h2>
