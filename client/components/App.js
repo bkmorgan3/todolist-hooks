@@ -10,7 +10,7 @@ function App() {
     { id: 2, text: 'find a chicken sandwich' },
     { id: 3, text: "see Andang all day" }
   ];
-  const initialFormState = {text: ''};
+  const initialFormState = { id: null, todo_text: '' };
   const URL = 'http://localhost:8080/api/todos';
   const [todos, setTodos] = useState(todoData);
   const [editing, setEditing] = useState(false)
@@ -52,18 +52,15 @@ function App() {
   const editTodo = todo => {
     console.log("editing todo", todo)
     setEditing(true)
-    setCurrentTodo(todo)
-    const opts = {
-      method: 'PUT',
-      body: JSON.stringify({todo})
-    }
-  
+    setCurrentTodo(({ id: todo.id, todo_text: todo.todo_text }))
+
+
   }
 
   const updateTodo = (id, updatedTodo) => {
     setEditing(false)
 
-    setTodos(todos.map(item => (item.id === id? updatedTodo: item)))
+    setTodos(todos.map(item => (item.id === id ? updatedTodo : item)))
   }
 
   return (
@@ -80,13 +77,13 @@ function App() {
                 currentTodo={currentTodo}
                 updateTodo={updateTodo}
               />
-              </div>
+            </div>
           ) : (
-          <div>
-          <h2>Add a Todo</h2>
-          <AddTodoForm addTodo={addTodo} />
-          </div>
-          )}
+              <div>
+                <h2>Add a Todo</h2>
+                <AddTodoForm addTodo={addTodo} />
+              </div>
+            )}
         </div>
         <div className="todos">
           <h2>View Todos</h2>

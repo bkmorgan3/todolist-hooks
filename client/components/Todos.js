@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const Todos = props => {
-  
+
   return (<div>
     <ul>
       {props.todos.length > 0 ? (
