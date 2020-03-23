@@ -2,14 +2,13 @@ import React, { useState, useEffect } from 'react';
 
 const EditForm = props => {
   const [todo, setTodo] = useState(props.currentTodo)
-  console.log("props in edit ", props)
+  // console.log("props in edit ", props)
   console.log("todo", todo)
 
   const handleInputChange = e => {
     const { name, value } = event.target
 
     setTodo({ ...todo, todo_text: value })
-    console.log("the updated to do is", todo)
   }
 
   useEffect(() => {

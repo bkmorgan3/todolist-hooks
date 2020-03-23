@@ -46,7 +46,8 @@ const deleteTodo = (req, res, next) => {
 }
 
 const updateTodo = (req, res, next) => {
-  const updateQ = `UPDATE todos SET todo_text='${req.body.todo_text}' WHERE todos.id=${req.params.id}`;
+  console.log("incoming update!", req.body)
+  const updateQ = `UPDATE todos SET todo_text='${req.body.updatedTodo.todo_text}' WHERE todos.id=${req.params.id}`;
   pool.query(updateQ, (err, result) => {
     if (err) return next(err)
     res.locals.todos = result.rows
