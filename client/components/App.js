@@ -70,10 +70,12 @@ function App() {
   }
 
   return (
-    <div>
-      <h1>My Todo lists.</h1>
+    <div >
+      <div className="container">
+      <h1>A New List</h1>
+      </div>
       <div className="row">
-        <div className="todo-form">
+        <div className="flex-large">
           {editing ? (
             <div>
               <h2>Edit User</h2>
@@ -91,7 +93,7 @@ function App() {
               </div>
             )}
         </div>
-        <div className="todos">
+        <div className="flex-large">
           <h2>View Todos</h2>
           <Todos todos={todos} deleteTodo={deleteTodo} editTodo={editTodo} />
         </div>
