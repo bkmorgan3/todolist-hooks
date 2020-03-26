@@ -10,7 +10,7 @@ const AddTodoForm = props => {
     setTodo(e.target.value)
   }
   return (
-    <form
+    <form className="add-form"
       onSubmit={e => {
         e.preventDefault()
         if (!todo) return
@@ -18,8 +18,8 @@ const AddTodoForm = props => {
         setTodo(initialFormState)
       }}
     >
-      <label htmlFor="title">Your Todo ---></label>
-      <input type="text" name="todo" placeholder="right here!" value={todo} onChange={handleChange} />
+      <label className="label" htmlFor="title">Your Todo</label>
+      <input type="text" className="input" name="todo" placeholder="right here!" value={todo} onChange={handleChange} />
       <button>Add Todo</button>
     </form >
   )

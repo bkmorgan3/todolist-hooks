@@ -1,8 +1,6 @@
 const pool = require("../database/database");
 
 const addTodo = (req, res, next) => {
-  console.log("inside make a todo controller");
-  console.log("req.body", req.body.todo)
   const qAddTodo = {
     text: `INSERT INTO todos (todo_text) VALUES ($1) RETURNING *`,
     values: [req.body.todo]
@@ -19,12 +17,10 @@ const addTodo = (req, res, next) => {
 }
 
 const getAllTodos = (req, res, next) => {
-  console.log("getting all the todos")
   const queryAllTodos = `SELECT * FROM todos;`
   pool.query(queryAllTodos, (err, result) => {
     if (err) return next(err);
     if (result === undefined) {
-      console.log("its broken")
       return next()
     }
     console.log(result.rows)
@@ -46,7 +42,6 @@ const deleteTodo = (req, res, next) => {
 }
 
 const updateTodo = (req, res, next) => {
-  console.log("incoming update!", req.body)
   const updateQ = `UPDATE todos SET todo_text='${req.body.updatedTodo.todo_text}' WHERE todos.id=${req.params.id}`;
   pool.query(updateQ, (err, result) => {
     if (err) return next(err)

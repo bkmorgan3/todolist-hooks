@@ -65,15 +65,15 @@ function App() {
     }
     fetch(`${URL}/${id}`, opts)
       .then(res => res.json())
-      .then(data => console.log("data back", data))
+      .then(data => data)
     setTodos(todos.map(item => (item.id === id ? updatedTodo : item)))
   }
 
   return (
-    <div>
+    <div className="app">
       <h1>My Todo lists.</h1>
       <div className="row">
-        <div className="todo-form">
+        <div className="flex-col">
           {editing ? (
             <div>
               <h2>Edit User</h2>
@@ -85,7 +85,7 @@ function App() {
               />
             </div>
           ) : (
-              <div>
+              <div className="flex-col">
                 <h2>Add a Todo</h2>
                 <AddTodoForm addTodo={addTodo} />
               </div>
