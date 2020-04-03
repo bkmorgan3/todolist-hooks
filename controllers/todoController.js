@@ -23,7 +23,6 @@ const getAllTodos = (req, res, next) => {
     if (result === undefined) {
       return next()
     }
-    console.log(result.rows)
     res.locals.todos = result.rows;
     return next();
   })

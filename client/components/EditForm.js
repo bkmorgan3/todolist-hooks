@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 const EditForm = props => {
   const [todo, setTodo] = useState(props.currentTodo)
-  // console.log("props in edit ", props)
+  console.log("props in edit ", props)
   console.log("todo", todo)
 
   const handleInputChange = e => {

@@ -10,7 +10,7 @@ function App() {
     { id: 2, text: 'find a chicken sandwich' },
     { id: 3, text: "see Andang all day" }
   ];
-  const initialFormState = { id: null, todo_text: '', created_at: '' };
+  const initialFormState = { id: null, todo_text: '', created_at: '', updated_at: '', completed: false };
   const URL = 'http://localhost:8080/api/todos';
   const [todos, setTodos] = useState(todoData);
   const [editing, setEditing] = useState(false)
@@ -70,10 +70,12 @@ function App() {
   }
 
   return (
-    <div className="app">
-      <h1>My Todo lists.</h1>
+    <div >
+      <div className="container">
+        <h1>A New List</h1>
+      </div>
       <div className="row">
-        <div className="flex-col">
+        <div className="flex-large">
           {editing ? (
             <div>
               <h2>Edit User</h2>
@@ -91,7 +93,7 @@ function App() {
               </div>
             )}
         </div>
-        <div className="todos">
+        <div className="flex-large">
           <h2>View Todos</h2>
           <Todos todos={todos} deleteTodo={deleteTodo} editTodo={editTodo} />
         </div>
