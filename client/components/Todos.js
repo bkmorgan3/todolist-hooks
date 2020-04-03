@@ -23,7 +23,7 @@ const Todos = props => {
                 <button onClick={() => props.editTodo(todo)}> Edit Todo</button>
                 <button onClick={() => props.deleteTodo(todo.id)}>Delete Todo</button>
               </td>
-              <td><p>{}</p></td>
+              <td><p>{Moment(todo.updated_at).format('LLL')}</p></td>
 
             </tr>
           ))

@@ -18,6 +18,7 @@ function App() {
 
 
 
+
   useEffect(() => {
     fetch(URL)
       .then(res => res.json())
@@ -53,7 +54,7 @@ function App() {
     console.log("editing todo", todo)
     setEditing(true)
 
-    setCurrentTodo(({ id: todo.id, todo_text: todo.todo_text, created_at: todo.created_at }))
+    setCurrentTodo(({ id: todo.id, todo_text: todo.todo_text, created_at: todo.created_at, updated_at: todo.updated_at, completed: todo.completed }))
   }
 
   const updateTodo = (id, updatedTodo) => {
